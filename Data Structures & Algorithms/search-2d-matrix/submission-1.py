@@ -1,0 +1,28 @@
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        row = []
+        l = 0
+        r = len(matrix) - 1
+        while l <= r:
+            mid = l + ((r - l) // 2)
+            tmpRow = matrix[mid]
+            if tmpRow[0] <= target and tmpRow[len(tmpRow) - 1] >= target:
+                row = tmpRow
+                break
+            else:
+                if tmpRow[0] > target:
+                    r = mid - 1
+                elif tmpRow[len(tmpRow) - 1] < target:
+                    l = mid + 1
+        l = 0
+        r = len(row) - 1
+        while l <= r:
+            mid = l + ((r - l) // 2)
+            if row[mid] == target:
+                return True
+            else:
+                if row[mid] > target:
+                    r = mid - 1
+                else:
+                    l = mid + 1
+        return False
